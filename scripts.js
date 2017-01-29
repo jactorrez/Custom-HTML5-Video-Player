@@ -9,6 +9,9 @@ const ranges = player.querySelectorAll(".player__slider");
 /* Functions */
 
 function togglePlay(){
+
+	console.dir(video);
+
 	if(video.paused){
 		video.play(); 
 	} else{
@@ -26,6 +29,9 @@ function skip(){
 	video.currentTime += parseFloat(this.dataset.skip);
 }
 
+function handleRangeUpdate(){
+	video[this.name] = this.value;
+}
 /* Hook up event listeners */
 video.addEventListener('click', togglePlay);
 playBtn.addEventListener('click', togglePlay);
@@ -35,4 +41,8 @@ video.addEventListener('pause', updateButton);
 
 skipButtons.forEach((btn) => {
 	btn.addEventListener("click", skip);
+});
+
+ranges.forEach((range) => {
+	range.addEventListener("input", handleRangeUpdate);
 });
